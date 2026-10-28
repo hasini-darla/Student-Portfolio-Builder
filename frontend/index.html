@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build and share your student portfolio.">
+  <title>Student Portfolio Builder</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Student Portfolio Builder home"><span class="brand-mark">SP</span> Student Portfolio Builder</a>
+    <nav id="nav" aria-label="Main navigation">
+      <a href="#home" data-view="home">Home</a>
+      <a href="#dashboard" data-view="dashboard" class="hidden" id="dashboard-link">Dashboard</a>
+      <button id="nav-login" class="button button-quiet">Log in</button>
+      <button id="nav-register" class="button button-primary">Get started</button>
+      <button id="nav-logout" class="button button-quiet hidden">Log out</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home-view" class="view hero">
+      <div class="hero-copy">
+        <p class="eyebrow">YOUR WORK. YOUR STORY.</p>
+        <h1>Turn what you learn into a <span class="accent">portfolio that speaks.</span></h1>
+        <p class="lead">Create a simple, professional home for your skills, projects, and ambitions. Share one link when opportunities come knocking.</p>
+        <div class="hero-actions">
+          <button class="button button-primary button-large" data-action="show-register">Build my portfolio <span aria-hidden="true">→</span></button>
+          <button class="button button-quiet button-large" data-action="show-login">I already have an account</button>
+        </div>
+        <div class="trust-row"><span class="dot"></span> Made for students and early-career builders</div>
+      </div>
+      <div class="preview-card" aria-label="Example portfolio preview">
+        <div class="preview-top"><span class="window-dots">● ● ●</span><span>MY PORTFOLIO</span><span class="preview-badge">LIVE PREVIEW</span></div>
+        <div class="preview-profile"><div class="avatar">AK</div><div><h2>Alex Kumar</h2><p>Computer Science Student</p></div></div>
+        <p class="preview-bio">Curious builder learning by making useful things.</p>
+        <p class="mini-label">SKILLS</p><div class="chips"><span>HTML & CSS</span><span>JavaScript</span><span>SQL</span></div>
+        <p class="mini-label">FEATURED PROJECTS</p>
+        <div class="preview-project"><span class="project-icon">✦</span><div><b>Campus Connect</b><small>A student community project</small></div><span>↗</span></div>
+        <div class="preview-project"><span class="project-icon purple">⌘</span><div><b>Study Planner</b><small>A simple productivity tool</small></div><span>↗</span></div>
+        <p class="demo-note">Illustrative preview — not a real student account.</p>
+      </div>
+      <div class="feature-strip">
+        <div><span class="feature-number">01</span><b>Build your profile</b><small>Introduce yourself clearly.</small></div>
+        <div><span class="feature-number">02</span><b>Show what you made</b><small>Make projects easy to explore.</small></div>
+        <div><span class="feature-number">03</span><b>Share your link</b><small>Let your work be discoverable.</small></div>
+      </div>
+    </section>
+
+    <section id="auth-view" class="view auth-layout hidden">
+      <div class="auth-aside"><p class="eyebrow">START WHERE YOU ARE</p><h1>Your next opportunity starts with showing your work.</h1><p>One profile. Your skills. Projects you're proud of.</p></div>
+      <div class="panel auth-panel">
+        <button class="text-button back-home" data-action="show-home">← Back to home</button>
+        <h2 id="auth-title">Create your account</h2><p id="auth-subtitle" class="muted">Build your student portfolio in a few steps.</p>
+        <form id="auth-form">
+          <label id="name-field" class="hidden">Full name<input name="name" autocomplete="name" maxlength="100" placeholder="e.g. Alex Kumar"></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters"></label>
+          <p class="form-hint" id="password-hint">Use at least 8 characters.</p>
+          <button class="button button-primary full-width" id="auth-submit" type="submit">Create account</button>
+        </form>
+        <p class="switch-auth" id="switch-auth">Already registered? <button class="text-button" data-action="show-login">Log in</button></p>
+      </div>
+    </section>
+
+    <section id="dashboard-view" class="view dashboard hidden">
+      <div class="dashboard-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>Build your portfolio<span class="period">.</span></h1><p class="muted">Keep your story up to date. Your changes are saved to the database.</p></div><button id="copy-portfolio" class="button button-quiet">Copy public link ↗</button></div>
+      <div id="status-message" class="notice hidden" role="status" aria-live="polite"></div>
+      <div class="dashboard-grid">
+        <aside class="dashboard-nav panel">
+          <button class="tab active" data-tab="profile">◉ <span>Profile</span></button>
+          <button class="tab" data-tab="projects">▧ <span>Projects</span></button>
+          <button class="tab" data-tab="skills">⌘ <span>Skills</span></button>
+          <div class="sidebar-tip"><b>Quick tip</b><p>Small, finished projects tell a stronger story than a long list of ideas.</p></div>
+        </aside>
+        <div class="dashboard-content">
+          <section class="panel editor-panel" id="profile-panel">
+            <div class="section-heading"><div><h2>Profile details</h2><p class="muted">Help visitors understand who you are.</p></div><span class="status-pill">YOUR PROFILE</span></div>
+            <form id="profile-form" class="form-grid">
+              <label>Full name<input name="full_name" maxlength="100" required placeholder="Your name"></label>
+              <label>Portfolio URL slug<input name="slug" maxlength="50" pattern="[a-z0-9-]+" required placeholder="your-name"></label>
+              <label class="span-two">Headline<input name="headline" maxlength="140" placeholder="e.g. First-year Computer Science student"></label>
+              <label class="span-two">About you<textarea name="bio" maxlength="1500" rows="4" placeholder="What are you learning? What do you enjoy building?"></textarea></label>
+              <label>College / institution<input name="education" maxlength="180" placeholder="College name"></label>
+              <label>Contact email<input name="contact_email" type="email" maxlength="254" placeholder="public contact email (optional)"></label>
+              <label class="span-two">LinkedIn URL<input name="linkedin_url" type="url" maxlength="500" placeholder="https://www.linkedin.com/in/your-profile"></label>
+              <label class="check-label span-two"><input name="is_published" type="checkbox"> Publish my portfolio so anyone with the link can view it</label>
+              <div class="span-two form-actions"><button class="button button-primary" type="submit">Save profile</button><span class="muted small">Your email and password are never shown publicly.</span></div>
+            </form>
+          </section>
+
+          <section class="panel editor-panel hidden" id="projects-panel">
+            <div class="section-heading"><div><h2>Your projects</h2><p class="muted">Show the things you have built and learned.</p></div><button class="button button-primary" id="new-project">+ Add project</button></div>
+            <form id="project-form" class="form-grid hidden">
+              <input type="hidden" name="id">
+              <label class="span-two">Project title<input name="title" maxlength="120" required placeholder="e.g. Campus Event Planner"></label>
+              <label class="span-two">Description<textarea name="description" rows="3" maxlength="2000" required placeholder="What does it do? What did you learn?"></textarea></label>
+              <label>Technologies<input name="technologies" maxlength="300" placeholder="HTML, CSS, JavaScript"></label>
+              <label>Project link<input name="project_url" type="url" maxlength="500" placeholder="https://... (optional)"></label>
+              <label>Source code link<input name="repository_url" type="url" maxlength="500" placeholder="https://github.com/... (optional)"></label>
+              <label class="check-label"><input name="is_featured" type="checkbox"> Feature this project</label>
+              <div class="span-two form-actions"><button class="button button-primary" type="submit">Save project</button><button class="button button-quiet" type="button" id="cancel-project">Cancel</button></div>
+            </form>
+            <div id="projects-list" class="item-list"></div>
+          </section>
+
+          <section class="panel editor-panel hidden" id="skills-panel">
+            <div class="section-heading"><div><h2>Your skills</h2><p class="muted">Add skills you can discuss or demonstrate.</p></div></div>
+            <form id="skill-form" class="inline-form"><label class="grow">Skill name<input name="name" maxlength="60" required placeholder="e.g. JavaScript"></label><label>Category<select name="category"><option value="Technical">Technical</option><option value="Soft skill">Soft skill</option><option value="Tools">Tools</option><option value="Languages">Languages</option></select></label><button class="button button-primary" type="submit">Add skill</button></form>
+            <div id="skills-list" class="skill-list"></div>
+          </section>
+        </div>
+      </div>
+      <section class="panel share-panel"><div><p class="eyebrow">READY TO SHARE?</p><h2>Your portfolio, one link away.</h2><p class="muted">Publish your profile, then share the link on your CV or application.</p></div><div class="share-actions"><code id="public-url">Publish your profile to get a link</code><button class="button button-primary" id="view-portfolio">View portfolio ↗</button></div></section>
+    </section>
+
+    <section id="public-view" class="view public-view hidden">
+      <div id="public-loading" class="loading-state">Loading portfolio…</div>
+      <div id="public-content" class="hidden">
+        <div class="public-hero"><a href="/" class="public-brand">SP / STUDENT PORTFOLIO</a><div class="public-intro"><div class="avatar avatar-large" id="public-avatar">SP</div><p class="eyebrow">STUDENT • BUILDER • LEARNER</p><h1 id="public-name"></h1><p id="public-headline" class="public-headline"></p><p id="public-bio" class="public-bio"></p><div class="public-actions"><a id="public-email" class="button button-primary hidden">Contact me</a><a id="public-linkedin" class="button button-quiet hidden" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div><p id="public-education" class="muted"></p></div></div>
+        <section class="public-section"><div class="section-heading"><div><p class="eyebrow">WHAT I KNOW</p><h2>Skills & tools</h2></div></div><div id="public-skills" class="chips public-chips"></div></section>
+        <section class="public-section"><div class="section-heading"><div><p class="eyebrow">WHAT I'VE MADE</p><h2>Selected projects</h2></div></div><div id="public-projects" class="public-project-grid"></div></section>
+        <footer class="public-footer"><span>Built with Student Portfolio Builder</span><a href="/">Create your own portfolio →</a></footer>
+      </div>
+      <div id="public-error" class="empty-state hidden"><div class="empty-icon">↗</div><h2>Portfolio not found</h2><p>This portfolio may not exist or may not be published.</p><a class="button button-primary" href="/">Back to home</a></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Student Portfolio Builder</span><span>Build with intention. Share with confidence.</span></footer>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+</body>
+</html>
